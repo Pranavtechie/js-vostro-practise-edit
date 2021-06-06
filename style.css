@@ -1,0 +1,15 @@
+fieldset {
+	border-color: red;
+}
+legend {
+	background-color: black;
+	color: yellow;
+	padding : 5px;
+}
+h1 {
+	color : green;
+}
+body {
+	background-image: url("https://source.unsplash.com/random");
+	background-repeat: no-repeat;
+}

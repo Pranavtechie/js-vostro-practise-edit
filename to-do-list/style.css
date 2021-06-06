@@ -1,0 +1,45 @@
+h2 {
+	text-align: center;
+}
+html {
+	margin: 0;
+	background-color: lightblue;
+}
+#adding {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	margin: auto;
+	padding: 0.5rem;
+}
+#todo-input {
+	background-color: transparent;
+	border : none;
+	border-bottom: 0.1rem solid black;
+	font-family: 'Cascadia Mono',Arial;
+	font-size: 1rem;
+}
+#todo-container {
+	border: 0.2rem solid white;
+	border-radius: 2rem;
+	display: block;
+	padding: 2rem;
+	width: 60%;
+	margin: auto;
+}
+.todo-element {
+	margin-right: 1rem;
+	font-family: 'Cascadia Mono','Arial';
+	font-size: 0.9rem;
+	background-color: transparent;
+}
+.todo-element:checked + label {
+	text-decoration: line-through;
+	color: red;
+}
+.todo-cover:even {
+	background-color: lightgreen;
+}
+.todo-cover:odd {
+	background-color: yellow;
+}
