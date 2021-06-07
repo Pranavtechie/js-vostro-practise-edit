@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css"/>
 <title>To Do List</title>
+<link rel="shortcut icon" type="image/jpg" href="task-list.svg"/>
 </head>
 <body>
 <h2>To Do List</h2>
 <div id="adding">
-<input type="text" id="todo-input">
-<button id="add-todo">Add</button>
+<input type="text" id="todo-input" placeholder="Enter the task">
+<button onclick="addToDo()" id="add-todo">Add</button>
 </div>
 <div id="todo-container">
 <p class="todo-cover"><input type="checkbox" class="todo-element" id="one"><label for="one">Just Checking</label></p>

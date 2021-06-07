@@ -17,5 +17,3 @@ inputElement.addEventListener('keypress',(e) => {
 	if (e.key == 'Enter') {
 		addToDo();
 }});
-let addButton = document.querySelector('#add-todo');
-addButton.addEventListener('click', addToDo());
