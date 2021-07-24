@@ -1,5 +1,27 @@
-<html>
-<head><title>Oh God</title></head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="src/favicon.ico" />
+</head>
+
 <body>
+    <header>
+        <h2>To Do List</h2>
+    </header>
+
+    <div id="adding">
+        <input type="text" id="todo-input" placeholder="Enter the task" autocomplete="off">
+        <button onclick="addNewTask()" id="add-todo">Add</button>
+    </div>
+    <div id="todo-container">
+    </div>
+    <script src="js/script.js"></script>
+
 </body>
+
 </html>

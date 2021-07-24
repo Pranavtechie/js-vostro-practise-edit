@@ -1,0 +1,125 @@
+html {
+}
+:root {
+  --primary-color: red;
+  --secondary-color: red;
+  --background-color: hsla(0, 0%, 12%, 1);
+  --header-background-color: hsla(0, 1%, 9%, 1);
+  --text-color: hsla(0, 0%, 78%, 1);
+  --header-color: hsla(0, 0%, 88%, 1);
+  --light-background: hsla(0, 0%, 72%, 1);
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: var(--background-color);
+}
+header {
+  margin: 0px;
+  box-sizing: border-box;
+  display: block;
+  margin: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  padding: 1rem;
+  background-color: var(--header-background-color);
+  color: var(--header-color);
+}
+h2 {
+  display: inline;
+}
+#adding {
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  padding: 0.5rem;
+}
+#todo-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 0.1rem solid hsla(254, 100%, 15%, 1);
+  font-family: "Cascadia Mono", Arial;
+  font-size: 1.4rem;
+  margin-right: 1.5rem;
+  color: var(--text-color);
+}
+#todo-input:focus {
+  outline: none;
+}
+#todo-container {
+  display: block;
+  padding: 1rem;
+  width: 50%;
+}
+#add-todo {
+  font-family: "Cascadia Mono", "Arial";
+  font-size: 1.4rem;
+  padding: 0.2rem 0.5rem;
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
+  background-color: hsla(0, 0%, 72%, 1);
+}
+.todo-text {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 70ch;
+  max-width: 100ch;
+}
+.todo-text:enabled {
+  background-color: hsla(0, 0, 50%);
+}
+.todo-element {
+  margin-right: 1rem;
+  font-family: "Monospace", "Cascadia Code", "Arial";
+  font-size: 1.1rem;
+  background-color: transparent;
+  padding: 0.5rem;
+  list-style-type: circle;
+}
+.todo-element:checked + label input {
+  text-decoration: line-through;
+  color: gray;
+}
+.todo-cover {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.todo-cover {
+  background-color: hsla(0, 0%, 16%, 1);
+  border-radius: 0.4rem;
+}
+.todo-text:disabled {
+  color: hsla(0, 0%, 80%, 1);
+  background-color: hsla(0, 0%, 16%, 1);
+}
+.todo-text {
+  color: hsla(0, 0%, 80%, 1);
+  background-color: hsla(0, 0%, 35%, 0.5);
+  border-radius: 0.2rem;
+  font-weight: 200;
+}
+
+.sec-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+.trash {
+  color: hsla(0, 0%, 40%, 1);
+}
+.trash:hover {
+  color: hsl(0, 100%, 40%);
+}
+.edit {
+  color: hsla(0, 0%, 40%, 1);
+}
+.edit:hover {
+  color: hsl(243, 100%, 25%);
+}
+.check:hover {
+  color: green;
+}
