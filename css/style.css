@@ -18,16 +18,31 @@ body {
 header {
   margin: 0px;
   box-sizing: border-box;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: none;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  padding: 1rem;
+  padding: 0.2rem;
   background-color: var(--header-background-color);
   color: var(--header-color);
 }
 h2 {
   display: inline;
+}
+#task-count {
+  padding: 0.8rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid gray;
 }
 #adding {
   text-align: center;
@@ -64,7 +79,7 @@ h2 {
   background-color: transparent;
   outline: none;
   border: none;
-  width: 70ch;
+  width: 60ch;
   max-width: 100ch;
 }
 .todo-text:enabled {
@@ -122,4 +137,10 @@ h2 {
 }
 .check:hover {
   color: green;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    font-size: medium;
+  }
 }

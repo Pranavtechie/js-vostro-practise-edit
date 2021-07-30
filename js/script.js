@@ -17,7 +17,7 @@ function getLocalData() {
   return checkValue ? JSON.parse(localStorage.getItem("tasks")) : [];
 }
 
-function makeTaskElement(id, task) {
+function makeTaskElement(id, task, isChecked) {
   /**
    * Returns the uniqueId & HTML to be injected to the task container
    * @param {string} [The task entered by the user]
@@ -25,7 +25,9 @@ function makeTaskElement(id, task) {
   let templateLiteral = `
   <div class="todo-cover" id="${id + "-cover"}">
     <section id="${id + "-primary-part"}"class="primary-part"">
-      <input type="checkbox" class="todo-element" id="${id + "-check"}">
+      <input type="checkbox" class="todo-element" id="${
+        id + "-check"
+      }" onchange="handleChange(this)" ${isChecked ? "checked" : ""}>
       <label for="${id + "-check"}" class="check-label">
         <input class="todo-text" id="${
           id + "-data"
@@ -50,7 +52,6 @@ function makeTaskElement(id, task) {
   var parser = new DOMParser();
   var wrapper = parser.parseFromString(templateLiteral, "text/html");
   let makeTemplate = wrapper.getElementById(`${id + "-cover"}`);
-  console.log(makeTemplate);
   return makeTemplate;
 }
 function deleteFromLocalData(taskId) {
@@ -69,6 +70,7 @@ function deleteTask(taskId) {
   deleteFromLocalData(ogId);
   let container = document.getElementById("todo-container");
   container.removeChild(document.getElementById(ogId + "-cover"));
+  decrementTotalTasks();
 }
 function editTask(taskId) {
   let simpleId = parseInt(taskId) + "";
@@ -113,14 +115,18 @@ function injectTasks() {
     return null;
   } else {
     localData.forEach((element) => {
-      let taskHTML = makeTaskElement(element.id, element.task);
+      let taskHTML = makeTaskElement(
+        element.id,
+        element.task,
+        element.isChecked
+      );
       container.appendChild(taskHTML);
     });
   }
 }
 function addTaskToLocalData(id, task) {
   let localData = getLocalData();
-  localData.push({ id: `${id}`, task: `${task}` });
+  localData.push({ id: `${id}`, task: `${task}`, isChecked: false });
   localStorage.setItem("tasks", JSON.stringify(localData));
 }
 
@@ -130,12 +136,33 @@ function addNewTask() {
     let taskId = randomString();
     addTaskToLocalData(taskId, task.value);
     const jsonData = JSON.parse(localStorage.getItem("tasks"));
-    let taskHTML = makeTaskElement(taskId, task.value);
+    let taskHTML = makeTaskElement(taskId, task.value, task.isChecked);
     let toDoDiv = document.querySelector("#todo-container");
     toDoDiv.appendChild(taskHTML);
     task.value = "";
+    incrementTotalTasks();
   } else {
     alert("No task has been typed!");
+  }
+}
+
+function handleChange(checkbox) {
+  let localData = getLocalData();
+  let simpleId = parseInt(checkbox.id) + "";
+  let taskIndex = 0;
+  for (task in localData) {
+    if (localData[task].id === simpleId) {
+      taskIndex = task;
+    }
+  }
+  if (checkbox.checked === true) {
+    localData[taskIndex].isChecked = true;
+    localStorage.setItem("tasks", JSON.stringify(localData));
+    incrementCompletedTasks();
+  } else if (checkbox.checked === false) {
+    localData[taskIndex].isChecked = false;
+    localStorage.setItem("tasks", JSON.stringify(localData));
+    decrementCompletedTasks();
   }
 }
 let inputElement = document.querySelector("#todo-input");
@@ -144,18 +171,60 @@ inputElement.addEventListener("keypress", (e) => {
     addNewTask();
   }
 });
-// Todo : Add checked key-value pair to localStorage
 // Todo: https://www.youtube.com/watch?v=icwJYT-Ilpw
 //stackoverflow.com/questions/42213858/how-can-i-get-parent-id-by-onclick-on-a-child-in-js
 // localStorage.setItem(
 //   "tasks",
 //   JSON.stringify([
-//     { id: "3431243", task: "This is the task description" },
-//     { id: "3432433", task: "This is another description of the task" },
+//     { id: "3431243", task: "This is the task description", isChecked: false },
+//     {
+//       id: "3432433",
+//       task: "This is another description of the task",
+//       isChecked: false,
+//     },
 //   ])
 // );
 document.addEventListener("DOMContentLoaded", (event) => {
   injectTasks();
 });
+
+let totalTasks = 0;
+let completedTasks = 0;
+
+let totalTasksElement = document.getElementById("total-tasks");
+let completedTasksElement = document.getElementById("completed-tasks");
+
+function setTaskValues() {
+  let localData = getLocalData();
+  for (task in localData) {
+    if (localData[task].isChecked === false) {
+      totalTasks++;
+    } else if (localData[task].isChecked === true) {
+      totalTasks++;
+      completedTasks++;
+    }
+  }
+  completedTasksElement.textContent = `${completedTasks}`;
+  totalTasksElement.textContent = `${totalTasks}`;
+}
+
+setTaskValues();
+
+function incrementCompletedTasks() {
+  let updatedValue = parseInt(completedTasksElement.textContent) + 1;
+  completedTasksElement.textContent = `${updatedValue}`;
+}
+function decrementCompletedTasks() {
+  let updatedValue = parseInt(completedTasksElement.textContent) - 1;
+  completedTasksElement.textContent = `${updatedValue}`;
+}
+function incrementTotalTasks() {
+  let updatedValue = parseInt(totalTasksElement.textContent) + 1;
+  totalTasksElement.textContent = `${updatedValue}`;
+}
+
+function decrementTotalTasks() {
+  let updatedValue = parseInt(totalTasksElement.textContent) - 1;
+  totalTasksElement.textContent = `${updatedValue}`;
+}
 // Todo : figure out what to do when the checkbox is checked
-// Todo : Create a new localstorage element to track tasks
